@@ -110,16 +110,25 @@ function crearProductoElemento(producto) {
     precio.textContent = `$${producto.precio}`;
     divProducto.appendChild(precio);
 
+     // Botón "Agregar al carrito"
     const botonAgregar = document.createElement('button');
     botonAgregar.textContent = 'Agregar al carrito';
     botonAgregar.onclick = () => carrito.agregarProducto(producto);
     divProducto.appendChild(botonAgregar);
+
+    // Botón "Mostrar detalles"
+    const botonDetalles = document.createElement('button');
+    botonDetalles.textContent = 'Mostrar detalles';
+    botonDetalles.onclick = () => mostrarDetalleProducto(producto);
+    divProducto.appendChild(botonDetalles);
 
     return divProducto;
 }
 
 // Mostrar detalles de un producto en un modal
 function mostrarDetalleProducto(producto) {
+    console.log('Mostrando detalles del producto:', producto);
+
     const modal = document.createElement('div');
     modal.classList.add('modal');
 
@@ -150,7 +159,10 @@ function mostrarDetalleProducto(producto) {
 
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
+
+    modal.classList.add('mostrar'); // Muestra el modal
 }
+
 
 // Mostrar el contenido del carrito en un modal
 function mostrarCarritoModal() {
