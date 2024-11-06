@@ -1,0 +1,147 @@
+/* Estilos generales */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+}
+
+body {
+	background-color: #f8f4f9;
+	color: #333;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+}
+
+/* Header */
+header {
+	background-color: #f5e1e9;
+	color: #b04a74;
+	padding: 2em;
+	text-align: center;
+	width: 100%;
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+/* Contenedor principal */
+main {
+	width: 90%;
+	max-width: 1200px;
+	margin: 2em auto;
+}
+
+/* Carrito */
+#carrito {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+	background: #b04a74;
+	color: #fff;
+	border-radius: 8px;
+	margin-bottom: 1em;
+}
+
+button {
+	background: #f8f4f9;
+	color: #b04a74;
+	border: none;
+	padding: 1em 1em;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+/* Productos - Grid */
+#productos {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 1em;
+}
+
+/* Tarjeta de cada producto */
+.producto {
+	background: #fff;
+	border-radius: 8px;
+	padding: 1.5em;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.producto img {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+/* Estilos para el modal del carrito */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1em;
+	z-index: 1000;
+}
+
+.modal-content {
+	background: #fff;
+	padding: 2em;
+	border-radius: 8px;
+	width: 100%;
+	max-width: 565px;
+	position: relative;
+}
+
+.item-carrito {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+
+.thumbnail {
+	width: 50px;
+	height: 50px;
+	border-radius: 4px;
+	margin-right: 1em;
+}
+
+/* Footer */
+footer {
+	background-color: #f5e1e9;
+	color: #b04a74;
+	text-align: center;
+	padding: 1rem 0;
+	margin-top: 2rem;
+	width: 100%;
+}
+
+footer ul {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+	margin-top: 1rem;
+}
+
+footer li {
+	margin: 0 1rem;
+}
+
+footer a {
+	color: #b04a74;
+	text-decoration: none;
+}
+
+footer a:hover {
+	text-decoration: underline;
+}

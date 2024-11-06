@@ -1,0 +1,11 @@
+[
+    { "id": 1, "nombre": "Sérum Facial", "descripcion": "Hidrata y rejuvenece tu piel.", "precio": 1200, "imagen": "images/serum-facial.jpg", "categoria": "Cuidado Facial" },
+    { "id": 2, "nombre": "Labial Mate", "descripcion": "Color intenso de larga duración.", "precio": 800, "imagen": "images/labial.jpg", "categoria": "Maquillaje" },
+    { "id": 3, "nombre": "Crema Hidratante", "descripcion": "Protege y humecta tu piel.", "precio": 950, "imagen": "images/crema-hidratante.jpg", "categoria": "Cuidado Corporal" },
+    { "id": 4, "nombre": "Mascarilla Facial", "descripcion": "Limpieza profunda y suavidad.", "precio": 650, "imagen": "images/mascara-facial.jpg", "categoria": "Cuidado Facial" },
+    { "id": 5, "nombre": "Esmalte de Uñas", "descripcion": "Brillo y durabilidad extrema.", "precio": 300, "imagen": "images/esmalte-uñas.jpg", "categoria": "Maquillaje" },
+    { "id": 6, "nombre": "Corrector de Ojeras", "descripcion": "Disimula imperfecciones.", "precio": 700, "imagen": "images/corrector-ojeras.jpg", "categoria": "Maquillaje" },
+    { "id": 7, "nombre": "Exfoliante Corporal", "descripcion": "Renueva tu piel al instante.", "precio": 1050, "imagen": "images/exfoliante-corporal.jpg", "categoria": "Cuidado Corporal" },
+    { "id": 8, "nombre": "Sombra de Ojos", "descripcion": "Intensifica tu mirada.", "precio": 500, "imagen": "images/sombra-ojos.jpg", "categoria": "Maquillaje" },
+    { "id": 9, "nombre": "Agua Micelar", "descripcion": "Desmaquilla y refresca tu rostro.", "precio": 600, "imagen": "images/agua-micelar.jpg", "categoria": "Cuidado Facial" }
+]
