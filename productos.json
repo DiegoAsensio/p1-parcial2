@@ -2,7 +2,7 @@
     {
         "id": 1,
         "nombre": "Sérum Facial",
-        "descripcion": "Este sérum facial es una poderosa fórmula diseñada para hidratar profundamente y rejuvenecer tu piel desde la primera aplicación. Enriquecido con ingredientes naturales como ácido hialurónico y extractos botánicos, ayuda a reducir las líneas finas y a mejorar la elasticidad de la piel. Perfecto para usar tanto en la mañana como en la noche, este sérum dejará tu piel suave, luminosa y visiblemente más joven.",
+        "descripcion": "Este sérum facial es una poderosa fórmula diseñada para hidratar profundamente y rejuvenecer tu piel desde la primera aplicación.",
         "precio": 1200,
         "imagen": "images/serum-facial.jpg",
         "categoria": "Cuidado Facial"
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "nombre": "Labial Mate",
-        "descripcion": "Nuestro labial mate proporciona un color intenso y de larga duración que resiste todo el día sin necesidad de retoques. Su fórmula enriquecida con vitaminas mantiene los labios hidratados y evita la resequedad, ofreciendo una cobertura completa y un acabado aterciopelado. Disponible en una amplia gama de colores vibrantes, este labial es ideal para cualquier ocasión, desde reuniones informales hasta eventos importantes.",
+        "descripcion": "Nuestro labial mate proporciona un color intenso y de larga duración que resiste todo el día sin necesidad de retoques.",
         "precio": 800,
         "imagen": "images/labial.jpg",
         "categoria": "Maquillaje"
@@ -18,7 +18,7 @@
     {
         "id": 3,
         "nombre": "Crema Hidratante",
-        "descripcion": "La crema hidratante ha sido formulada para nutrir y proteger tu piel durante todo el día. Gracias a su mezcla de ingredientes naturales como la manteca de karité y el aceite de jojoba, esta crema penetra profundamente en la piel para proporcionar una hidratación duradera. Además, contiene antioxidantes que ayudan a combatir los signos de envejecimiento y mantienen la piel suave y radiante.",
+        "descripcion": "La crema hidratante ha sido formulada para nutrir y proteger tu piel durante todo el día.",
         "precio": 950,
         "imagen": "images/crema-hidratante.jpg",
         "categoria": "Cuidado Corporal"
@@ -26,7 +26,7 @@
     {
         "id": 4,
         "nombre": "Mascarilla Facial",
-        "descripcion": "Esta mascarilla facial es tu aliado perfecto para una limpieza profunda y una piel revitalizada. Hecha a base de arcilla volcánica y extractos de té verde, ayuda a eliminar impurezas, desintoxicar la piel y reducir los poros dilatados. El resultado es un rostro fresco, suave y lleno de vitalidad. Úsala una o dos veces por semana para maximizar sus beneficios.",
+        "descripcion": "Esta mascarilla facial es tu aliado perfecto para una limpieza profunda y una piel revitalizada.",
         "precio": 650,
         "imagen": "images/mascara-facial.jpg",
         "categoria": "Cuidado Facial"
@@ -34,7 +34,7 @@
     {
         "id": 5,
         "nombre": "Esmalte de Uñas",
-        "descripcion": "Nuestro esmalte de uñas te ofrece un brillo deslumbrante y una durabilidad extrema para mantener tus uñas perfectas por más tiempo. Su fórmula de secado rápido y resistencia a astillas permite un acabado impecable y duradero. Elige entre una amplia variedad de colores que van desde los tonos clásicos hasta los más atrevidos, para reflejar tu estilo único.",
+        "descripcion": "Nuestro esmalte de uñas te ofrece un brillo deslumbrante y una durabilidad extrema para mantener tus uñas perfectas por más tiempo.",
         "precio": 300,
         "imagen": "images/esmalte-uñas.jpg",
         "categoria": "Maquillaje"
@@ -42,7 +42,7 @@
     {
         "id": 6,
         "nombre": "Corrector de Ojeras",
-        "descripcion": "El corrector de ojeras es tu secreto para un rostro descansado y radiante. Con su fórmula ligera y de alta cobertura, camufla las ojeras y otras imperfecciones al instante. Además, está enriquecido con agentes hidratantes que no resecan la piel y garantizan un acabado natural durante todo el día. Perfecto para cualquier tipo de piel y fácil de aplicar, se convierte en un básico de tu rutina diaria.",
+        "descripcion": "El corrector de ojeras es tu secreto para un rostro descansado y radiante.",
         "precio": 700,
         "imagen": "images/corrector-ojeras.jpg",
         "categoria": "Maquillaje"
@@ -50,7 +50,7 @@
     {
         "id": 7,
         "nombre": "Exfoliante Corporal",
-        "descripcion": "Renueva tu piel con nuestro exfoliante corporal a base de café y aceites esenciales. Esta mezcla revitalizante elimina las células muertas, estimula la circulación y deja tu piel suave y tersa. Ideal para utilizar en la ducha, aporta una sensación energizante y un suave aroma a café recién molido. Úsalo dos o tres veces por semana para obtener mejores resultados.",
+        "descripcion": "Renueva tu piel con nuestro exfoliante corporal a base de café y aceites esenciales.",
         "precio": 1050,
         "imagen": "images/exfoliante-corporal.jpg",
         "categoria": "Cuidado Corporal"
@@ -58,7 +58,7 @@
     {
         "id": 8,
         "nombre": "Sombra de Ojos",
-        "descripcion": "Nuestra paleta de sombras de ojos incluye una combinación perfecta de colores vibrantes y neutros para que puedas crear desde un look natural hasta un maquillaje más dramático. Las sombras son altamente pigmentadas y se difuminan con facilidad, garantizando un acabado impecable. Además, su fórmula de larga duración te asegura que tu maquillaje se mantenga intacto durante todo el día o la noche.",
+        "descripcion": "Nuestra paleta de sombras de ojos incluye una combinación perfecta de colores vibrantes y neutros.",
         "precio": 500,
         "imagen": "images/sombra-ojos.jpg",
         "categoria": "Maquillaje"
@@ -66,7 +66,7 @@
     {
         "id": 9,
         "nombre": "Agua Micelar",
-        "descripcion": "El agua micelar es un limpiador suave y eficaz que elimina el maquillaje y las impurezas de la piel en un solo paso. Formulada con micelas que actúan como imanes para atrapar la suciedad y el sebo, deja tu rostro fresco y sin sensación de tirantez. Es perfecta para pieles sensibles y no necesita enjuague, por lo que es ideal para una rutina rápida y efectiva.",
+        "descripcion": "El agua micelar es un limpiador suave y eficaz que elimina el maquillaje y las impurezas de la piel en un solo paso.",
         "precio": 600,
         "imagen": "images/agua-micelar.jpg",
         "categoria": "Cuidado Facial"

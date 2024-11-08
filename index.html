@@ -11,22 +11,35 @@
     </head>
     <body>
         <header>
-            <!-- Reemplazar por los datos que correspondan -->
-            <h1>Programación I | Parcial 2 | Asensio | Mi carrito</h1>
+            <h1>My Beauty</h1>
         </header>
-        
-    <!-- Contenedor para el catálogo de productos y el carrito -->
-    <main>
-        <!-- Carrito -->
-        <div id="carrito">
-            <p><span>0</span> ítems agregados</p>
-            <p>Total: $<span>0</span></p>
-            <button id="verCarrito">Ver Carrito</button>
-        </div>
-        
-        <!-- Sección de catálogo de productos -->
-        <section id="productos"></section>
-    </main>
+    
+        <main>
+            <!-- Carrito y controles de filtro y ordenación -->
+            <div id="carrito">
+                <p><span id="cantidad-items">0</span> ítems agregados</p>
+                <p>Total: $<span id="total-carrito">0</span></p>
+                <button id="verCarrito">Ver Carrito</button>
+            </div>
+    
+            <!-- Controles de filtro y ordenación -->
+            <div id="controles">
+                <select id="filtro-categoria">
+                    <option value="todos">Todos</option>
+                    <option value="Cuidado Facial">Cuidado Facial</option>
+                    <option value="Maquillaje">Maquillaje</option>
+                    <option value="Cuidado Corporal">Cuidado Corporal</option>
+                </select>
+    
+                <select id="ordenar">
+                    <option value="alfabetico">Alfabético</option>
+                    <option value="precio-asc">Precio: Menor a Mayor</option>
+                    <option value="precio-desc">Precio: Mayor a Menor</option>
+                </select>
+            </div>
+    
+            <section id="productos"></section>
+        </main>
 
     <footer>
         <p>&copy; 2024 Diego Asensio. Todos los derechos reservados.</p>

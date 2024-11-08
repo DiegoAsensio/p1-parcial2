@@ -1,12 +1,12 @@
 'use strict';
 
+// Clase Carrito que maneja los productos del carrito y las operaciones asociadas
 class Carrito {
     constructor() {
         this.productos = JSON.parse(localStorage.getItem('carrito')) || [];
         this.actualizarCarritoDOM();
     }
 
-    // Agregar producto al carrito
     agregarProducto(producto) {
         const item = this.productos.find(p => p.id === producto.id);
         if (item) {
@@ -18,40 +18,32 @@ class Carrito {
         this.actualizarCarritoDOM();
     }
 
-    // Eliminar producto del carrito
     quitarProducto(id) {
         const itemIndex = this.productos.findIndex(item => item.id === id);
         if (itemIndex !== -1) {
             const item = this.productos[itemIndex];
             item.cantidad--;
-
-            // Si la cantidad llega a 0, lo eliminamos del array
             if (item.cantidad <= 0) {
                 this.productos.splice(itemIndex, 1);
             }
-
             this.actualizarStorage();
             this.actualizarCarritoDOM();
         }
     }
 
-    // Calcular total del carrito
     obtenerTotal() {
         return this.productos.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
     }
 
-    // Actualizar la visualización del carrito en el DOM
     actualizarCarritoDOM() {
         const carritoDOM = document.getElementById('carrito');
         if (!carritoDOM) {
             console.error('Elemento #carrito no encontrado en el DOM');
             return;
         }
-    
-        // Selecciona los elementos de cantidad y total de manera más precisa
+
         const cantidad = carritoDOM.querySelector('p:first-child span');
         const total = carritoDOM.querySelector('p:nth-child(2) span');
-    
         if (cantidad && total) {
             const cantidadTotal = this.productos.reduce((acc, item) => acc + item.cantidad, 0);
             cantidad.textContent = cantidadTotal;
@@ -60,9 +52,7 @@ class Carrito {
             console.error('Elementos internos del #carrito no encontrados');
         }
     }
-    
 
-    // Guardar el estado del carrito en localStorage
     actualizarStorage() {
         localStorage.setItem('carrito', JSON.stringify(this.productos));
     }
@@ -70,20 +60,28 @@ class Carrito {
 
 const carrito = new Carrito();
 
-// Función para cargar productos y mostrarlos en la página
+// Función para cargar productos desde productos.json
 async function cargarProductos() {
     try {
-        const response = await fetch('productos.json'); // Cambia esto si tienes los productos en un archivo JSON
-        const productos = await response.json(); // O usa un array de productos directamente si lo defines en el script
-        mostrarProductos(productos);
+        const response = await fetch('productos.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const productos = await response.json();
+        productosOriginales = productos;
+        mostrarProductos(productosOriginales); // Mostrar todos los productos inicialmente
     } catch (error) {
         console.error('Error al cargar los productos:', error);
+        const contenedor = document.getElementById('productos');
+        contenedor.innerHTML = '<p style="color: red;">Error al cargar los productos. Intenta recargar la página.</p>';
     }
 }
 
+// Variables globales
+let productosOriginales = [];
+
 // Mostrar productos en el DOM
 function mostrarProductos(productos) {
-    console.log(productos);
     const contenedor = document.getElementById('productos');
     contenedor.innerHTML = '';
     productos.forEach(prod => {
@@ -110,7 +108,7 @@ function crearProductoElemento(producto) {
     precio.textContent = `$${producto.precio}`;
     divProducto.appendChild(precio);
 
-     // Botón "Agregar al carrito"
+    // Botón "Agregar al carrito"
     const botonAgregar = document.createElement('button');
     botonAgregar.textContent = 'Agregar al carrito';
     botonAgregar.onclick = () => carrito.agregarProducto(producto);
@@ -127,8 +125,6 @@ function crearProductoElemento(producto) {
 
 // Mostrar detalles de un producto en un modal
 function mostrarDetalleProducto(producto) {
-    console.log('Mostrando detalles del producto:', producto);
-
     const modal = document.createElement('div');
     modal.classList.add('modal');
 
@@ -159,13 +155,18 @@ function mostrarDetalleProducto(producto) {
 
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
-
-    modal.classList.add('mostrar'); // Muestra el modal
+    modal.classList.add('mostrar');
 }
-
 
 // Mostrar el contenido del carrito en un modal
 function mostrarCarritoModal() {
+    // Elimina cualquier modal existente antes de crear uno nuevo
+    const modalExistente = document.querySelector('.modal');
+    if (modalExistente) {
+        modalExistente.remove();
+    }
+
+    // Crear el modal
     const modal = document.createElement('div');
     modal.classList.add('modal');
 
@@ -225,7 +226,33 @@ function mostrarCarritoModal() {
     document.body.appendChild(modal);
 }
 
-// Agregar el evento al botón "Ver Carrito"
+
+// Filtrar y ordenar productos
+function filtrarYOrdenarProductos() {
+    let productosFiltrados = [...productosOriginales];
+
+    const filtroCategoria = document.getElementById('filtro-categoria').value;
+    if (filtroCategoria !== 'todos') {
+        productosFiltrados = productosFiltrados.filter(prod => prod.categoria === filtroCategoria);
+    }
+
+    const orden = document.getElementById('ordenar').value;
+    if (orden === 'alfabetico') {
+        productosFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    } else if (orden === 'precio-asc') {
+        productosFiltrados.sort((a, b) => a.precio - b.precio);
+    } else if (orden === 'precio-desc') {
+        productosFiltrados.sort((a, b) => b.precio - a.precio);
+    }
+
+    mostrarProductos(productosFiltrados);
+}
+
+// Agregar eventos a los controles de filtro y ordenación
+document.getElementById('filtro-categoria').addEventListener('change', filtrarYOrdenarProductos);
+document.getElementById('ordenar').addEventListener('change', filtrarYOrdenarProductos);
+
+// Agregar evento al botón "Ver Carrito"
 document.getElementById('verCarrito').addEventListener('click', mostrarCarritoModal);
 
 // Cargar productos al cargar la página
