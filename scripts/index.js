@@ -31,6 +31,12 @@ class Carrito {
         }
     }
 
+    vaciarCarrito() {
+        this.productos = [];
+        this.actualizarStorage();
+        this.actualizarCarritoDOM();
+    }
+
     obtenerTotal() {
         return this.productos.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
     }
@@ -168,10 +174,10 @@ function mostrarCarritoModal() {
 
     // Crear el modal
     const modal = document.createElement('div');
-    modal.classList.add('modal');
+    modal.classList.add('modal-carrito');
 
     const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
+    modalContent.classList.add('modal-carrito-content');
 
     const titulo = document.createElement('h3');
     titulo.textContent = 'Detalle del Carrito';
@@ -199,13 +205,23 @@ function mostrarCarritoModal() {
             itemCarrito.appendChild(nombre);
 
             const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
+            botonEliminar.textContent = '-';
             botonEliminar.onclick = () => {
                 carrito.quitarProducto(producto.id);
                 modal.remove();
                 mostrarCarritoModal(); // Refresca el modal para mostrar los cambios
             };
             itemCarrito.appendChild(botonEliminar);
+
+            // Crear botón para agregar producto (aumentar cantidad)
+            const botonAgregar = document.createElement('button');
+            botonAgregar.textContent = '+';
+            botonAgregar.onclick = () => {
+                carrito.agregarProducto(producto);
+                modal.remove();
+                mostrarCarritoModal();
+            };
+            itemCarrito.appendChild(botonAgregar);
 
             modalContent.appendChild(itemCarrito);
         });
@@ -216,6 +232,16 @@ function mostrarCarritoModal() {
         modalContent.appendChild(total);
     }
 
+    // Crear botón para vaciar todo el carrito
+    const botonVaciarCarrito = document.createElement('button');
+    botonVaciarCarrito.textContent = 'Vaciar Carrito';
+    botonVaciarCarrito.onclick = () => {
+        carrito.vaciarCarrito();
+        modal.remove();
+        mostrarCarritoModal();
+    };
+    modalContent.appendChild(botonVaciarCarrito);
+
     // Botón para cerrar el modal
     const botonCerrar = document.createElement('button');
     botonCerrar.textContent = 'Cerrar';
@@ -224,7 +250,11 @@ function mostrarCarritoModal() {
 
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
+
+    // Mostrar el modal agregando la clase 'mostrar'
+    modal.classList.add('mostrar');
 }
+
 
 
 // Filtrar y ordenar productos
