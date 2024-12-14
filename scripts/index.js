@@ -179,9 +179,21 @@ function mostrarCarritoModal() {
     const modalContent = document.createElement('div');
     modalContent.classList.add('modal-carrito-content');
 
+    // Contenedor del título y botón de cerrar
+    const contenedorTitulo = document.createElement('div');
+    contenedorTitulo.classList.add('contenedor-titulo');
+
     const titulo = document.createElement('h3');
     titulo.textContent = 'Detalle del Carrito';
-    modalContent.appendChild(titulo);
+    contenedorTitulo.appendChild(titulo);
+
+    const botonCerrar = document.createElement('button');
+    botonCerrar.textContent = '×';
+    botonCerrar.classList.add('boton-cerrar');
+    botonCerrar.onclick = () => modal.remove();
+    contenedorTitulo.appendChild(botonCerrar);
+
+    modalContent.appendChild(contenedorTitulo);
 
     // Si el carrito está vacío
     if (carrito.productos.length === 0) {
@@ -209,7 +221,7 @@ function mostrarCarritoModal() {
             botonEliminar.onclick = () => {
                 carrito.quitarProducto(producto.id);
                 modal.remove();
-                mostrarCarritoModal(); // Refresca el modal para mostrar los cambios
+                mostrarCarritoModal();
             };
             itemCarrito.appendChild(botonEliminar);
 
@@ -232,30 +244,141 @@ function mostrarCarritoModal() {
         modalContent.appendChild(total);
     }
 
-    // Crear botón para vaciar todo el carrito
+    // Contenedor para los botones de Vaciar Carrito y Comprar
+    const contenedorBotones = document.createElement('div');
+    contenedorBotones.classList.add('contenedor-botones');
+
     const botonVaciarCarrito = document.createElement('button');
     botonVaciarCarrito.textContent = 'Vaciar Carrito';
+    botonVaciarCarrito.classList.add('boton-vaciar');
     botonVaciarCarrito.onclick = () => {
         carrito.vaciarCarrito();
         modal.remove();
         mostrarCarritoModal();
     };
-    modalContent.appendChild(botonVaciarCarrito);
+    contenedorBotones.appendChild(botonVaciarCarrito);
 
-    // Botón para cerrar el modal
-    const botonCerrar = document.createElement('button');
-    botonCerrar.textContent = 'Cerrar';
-    botonCerrar.onclick = () => modal.remove();
-    modalContent.appendChild(botonCerrar);
+    const botonComprar = document.createElement('button');
+    botonComprar.textContent = 'Comprar';
+    botonComprar.classList.add('boton-comprar');
+    botonComprar.onclick = () => {
+        modal.remove();
+        mostrarCheckoutModal();
+    };
+    contenedorBotones.appendChild(botonComprar);
+
+    modalContent.appendChild(contenedorBotones);
 
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
 
-    // Mostrar el modal agregando la clase 'mostrar'
     modal.classList.add('mostrar');
 }
 
+// Mostrar el formulario de checkout en un modal
+function mostrarCheckoutModal() {
+    const modal = document.createElement('div');
+    modal.classList.add('modal-checkout');
 
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-checkout-content');
+
+    const titulo = document.createElement('h3');
+    titulo.textContent = 'Formulario de Checkout';
+    modalContent.appendChild(titulo);
+
+    const campos = [
+        { label: 'Nombre', id: 'nombre', type: 'text' },
+        { label: 'Teléfono', id: 'telefono', type: 'text' },
+        { label: 'Email', id: 'email', type: 'email' },
+        { label: 'Lugar de Entrega', id: 'lugar', type: 'text' },
+        { label: 'Fecha de Entrega', id: 'fecha', type: 'date' },
+    ];
+
+    campos.forEach(campo => {
+        const label = document.createElement('label');
+        label.htmlFor = campo.id;
+        label.textContent = campo.label;
+        modalContent.appendChild(label);
+
+        const input = document.createElement('input');
+        input.type = campo.type;
+        input.id = campo.id;
+        input.name = campo.id;
+        input.required = true;
+        modalContent.appendChild(input);
+    });
+
+    // Campo select para el método de pago
+    const labelMetodoPago = document.createElement('label');
+    labelMetodoPago.htmlFor = 'metodo-pago';
+    labelMetodoPago.textContent = 'Método de Pago';
+    modalContent.appendChild(labelMetodoPago);
+
+    const selectMetodoPago = document.createElement('select');
+    selectMetodoPago.id = 'metodo-pago';
+    selectMetodoPago.name = 'metodo-pago';
+    selectMetodoPago.required = true;
+
+    const opcionesMetodoPago = [
+        { value: 'efectivo', text: 'Efectivo' },
+        { value: 'debito', text: 'Tarjeta de Débito' },
+        { value: 'credito', text: 'Tarjeta de Crédito' },
+    ];
+
+    opcionesMetodoPago.forEach(opcion => {
+        const optionElement = document.createElement('option');
+        optionElement.value = opcion.value;
+        optionElement.textContent = opcion.text;
+        selectMetodoPago.appendChild(optionElement);
+    });
+
+    modalContent.appendChild(selectMetodoPago);
+
+    const contenedorBotones = document.createElement('div');
+    contenedorBotones.classList.add('contenedor-botones-checkout');
+
+    const botonConfirmar = document.createElement('button');
+    botonConfirmar.type = 'button';
+    botonConfirmar.textContent = 'Confirmar Compra';
+    botonConfirmar.classList.add('boton-confirmar');
+    botonConfirmar.onclick = () => {
+        const inputs = modalContent.querySelectorAll('input, select');
+        let formularioValido = true;
+
+        inputs.forEach(input => {
+            if (!input.checkValidity()) {
+                formularioValido = false;
+                input.style.border = '2px solid red';
+            } else {
+                input.style.border = '1px solid #ccc';
+            }
+        });
+
+        if (formularioValido) {
+            carrito.vaciarCarrito();
+            modal.remove();
+            alert('Compra confirmada. ¡Gracias por tu pedido!');
+        } else {
+            alert('Por favor, completa todos los campos correctamente.');
+        }
+    };
+    contenedorBotones.appendChild(botonConfirmar);
+
+    const botonCancelar = document.createElement('button');
+    botonCancelar.type = 'button';
+    botonCancelar.textContent = 'Cancelar';
+    botonCancelar.classList.add('boton-cancelar');
+    botonCancelar.onclick = () => modal.remove();
+    contenedorBotones.appendChild(botonCancelar);
+
+    modalContent.appendChild(contenedorBotones);
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    modal.classList.add('mostrar');
+}
 
 // Filtrar y ordenar productos
 function filtrarYOrdenarProductos() {
