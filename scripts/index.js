@@ -79,7 +79,6 @@ async function cargarProductos() {
     } catch (error) {
         console.error('Error al cargar los productos:', error);
         const contenedor = document.getElementById('productos');
-        contenedor.innerHTML = '<p style="color: red;">Error al cargar los productos. Intenta recargar la página.</p>';
     }
 }
 
@@ -287,6 +286,7 @@ function mostrarCheckoutModal() {
     titulo.textContent = 'Formulario de Checkout';
     modalContent.appendChild(titulo);
 
+    // Campos del formulario
     const campos = [
         { label: 'Nombre', id: 'nombre', type: 'text' },
         { label: 'Teléfono', id: 'telefono', type: 'text' },
@@ -335,6 +335,47 @@ function mostrarCheckoutModal() {
 
     modalContent.appendChild(selectMetodoPago);
 
+    // Contenedor para el campo de cuotas (dinámico)
+    const contenedorCuotas = document.createElement('div');
+    contenedorCuotas.id = 'contenedor-cuotas';
+    modalContent.appendChild(contenedorCuotas);
+
+    // Manejar el cambio de método de pago para mostrar/ocultar el campo de cuotas
+    selectMetodoPago.addEventListener('change', () => {
+        if (selectMetodoPago.value === 'credito') {
+            // Agregar campo de cuotas si no está presente
+            if (!contenedorCuotas.querySelector('select')) {
+                const labelCuotas = document.createElement('label');
+                labelCuotas.htmlFor = 'cuotas';
+                labelCuotas.textContent = 'Selecciona las cuotas';
+                contenedorCuotas.appendChild(labelCuotas);
+
+                const selectCuotas = document.createElement('select');
+                selectCuotas.id = 'cuotas';
+                selectCuotas.name = 'cuotas';
+
+                const opcionesCuotas = [
+                    { value: '3', text: '3 cuotas sin interés' },
+                    { value: '6', text: '6 cuotas sin interés' },
+                    { value: '12', text: '12 cuotas con interés' }
+                ];
+
+                opcionesCuotas.forEach(opcion => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = opcion.value;
+                    optionElement.textContent = opcion.text;
+                    selectCuotas.appendChild(optionElement);
+                });
+
+                contenedorCuotas.appendChild(selectCuotas);
+            }
+        } else {
+            // Eliminar campo de cuotas si no se selecciona tarjeta de crédito
+            contenedorCuotas.innerHTML = '';
+        }
+    });
+
+    // Botones de acción
     const contenedorBotones = document.createElement('div');
     contenedorBotones.classList.add('contenedor-botones-checkout');
 
@@ -346,25 +387,22 @@ function mostrarCheckoutModal() {
         const inputs = modalContent.querySelectorAll('input, select');
         let formularioValido = true;
 
+        // Validar todos los campos
         inputs.forEach(input => {
             if (!input.checkValidity()) {
                 formularioValido = false;
-                input.style.border = '2px solid red';
+                input.style.border = '2px solid #e74c3c';
             } else {
-                input.style.border = '1px solid #ccc';
+                input.style.border = '2px solid #27ae60';
             }
         });
 
         if (formularioValido) {
             carrito.vaciarCarrito();
             modal.remove();
-            alert('Compra confirmada. ¡Gracias por tu pedido!');
-        } else {
-            alert('Por favor, completa todos los campos correctamente.');
         }
     };
     contenedorBotones.appendChild(botonConfirmar);
-
     const botonCancelar = document.createElement('button');
     botonCancelar.type = 'button';
     botonCancelar.textContent = 'Cancelar';

@@ -365,12 +365,6 @@ button:hover {
 	border-color: #3498db;
 }
 
-/* Estilo de validación de campos */
-.modal-checkout-content input:invalid,
-.modal-checkout-content select:invalid {
-	border: 2px solid red;
-}
-
 /* Botones */
 .contenedor-botones-checkout {
 	display: flex;
