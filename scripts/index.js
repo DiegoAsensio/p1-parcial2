@@ -418,6 +418,7 @@ function mostrarCheckoutModal() {
     modal.classList.add('mostrar');
 }
 
+// Mostrar el banner flotante solo para cambios de categoría
 function mostrarOfertaEspecial() {
     // Eliminar cualquier banner existente antes de crear uno nuevo
     const bannerExistente = document.getElementById('oferta-especial');
@@ -436,8 +437,8 @@ function mostrarOfertaEspecial() {
     setTimeout(() => banner.remove(), 10000);
 }
 
-// Modificar la función de filtrar productos
-function filtrarYOrdenarProductos() {
+// Filtrar productos por categoría y mostrar el banner
+function filtrarPorCategoria() {
     let productosFiltrados = [...productosOriginales];
 
     const filtroCategoria = document.getElementById('filtro-categoria').value;
@@ -445,22 +446,30 @@ function filtrarYOrdenarProductos() {
         productosFiltrados = productosFiltrados.filter(prod => prod.categoria === filtroCategoria);
     }
 
-    const orden = document.getElementById('ordenar').value;
-    if (orden === 'alfabetico') {
-        productosFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
-    } else if (orden === 'precio-asc') {
-        productosFiltrados.sort((a, b) => a.precio - b.precio);
-    } else if (orden === 'precio-desc') {
-        productosFiltrados.sort((a, b) => b.precio - a.precio);
-    }
-
-    mostrarProductos(productosFiltrados);
-    mostrarOfertaEspecial(); // Mostrar el banner cuando se filtra la categoría
+    mostrarProductos(productosFiltrados); // Actualizar la vista de productos
+    mostrarOfertaEspecial(); // Mostrar el banner al cambiar de categoría
 }
 
-// Agregar eventos a los controles de filtro y ordenación
-document.getElementById('filtro-categoria').addEventListener('change', filtrarYOrdenarProductos);
-document.getElementById('ordenar').addEventListener('change', filtrarYOrdenarProductos);
+// Ordenar productos sin mostrar el banner
+function ordenarProductos() {
+    let productosOrdenados = [...productosOriginales];
+    const orden = document.getElementById('ordenar').value;
+
+    if (orden === 'alfabetico') {
+        productosOrdenados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    } else if (orden === 'precio-asc') {
+        productosOrdenados.sort((a, b) => a.precio - b.precio);
+    } else if (orden === 'precio-desc') {
+        productosOrdenados.sort((a, b) => b.precio - a.precio);
+    }
+
+    mostrarProductos(productosOrdenados); // Actualizar la vista de productos
+}
+
+// Conectar los eventos de los filtros
+document.getElementById('filtro-categoria').addEventListener('change', filtrarPorCategoria);
+document.getElementById('ordenar').addEventListener('change', ordenarProductos);
+
 
 // Agregar evento al botón "Ver Carrito"
 document.getElementById('verCarrito').addEventListener('click', mostrarCarritoModal);
