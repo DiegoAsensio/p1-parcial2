@@ -418,7 +418,25 @@ function mostrarCheckoutModal() {
     modal.classList.add('mostrar');
 }
 
-// Filtrar y ordenar productos
+function mostrarOfertaEspecial() {
+    // Eliminar cualquier banner existente antes de crear uno nuevo
+    const bannerExistente = document.getElementById('oferta-especial');
+    if (bannerExistente) bannerExistente.remove();
+
+    // Crear el banner
+    const banner = document.createElement('div');
+    banner.id = 'oferta-especial';
+    banner.textContent = '¡Oferta Especial! Descuento del 20% en esta categoría durante tiempo limitado.';
+
+    // Establecer la clase para aplicar los estilos
+    banner.classList.add('banner-flotante');
+    document.body.appendChild(banner);
+
+    // Eliminar el banner después de 10 segundos
+    setTimeout(() => banner.remove(), 10000);
+}
+
+// Modificar la función de filtrar productos
 function filtrarYOrdenarProductos() {
     let productosFiltrados = [...productosOriginales];
 
@@ -437,6 +455,7 @@ function filtrarYOrdenarProductos() {
     }
 
     mostrarProductos(productosFiltrados);
+    mostrarOfertaEspecial(); // Mostrar el banner cuando se filtra la categoría
 }
 
 // Agregar eventos a los controles de filtro y ordenación

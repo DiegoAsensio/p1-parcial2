@@ -410,6 +410,33 @@ button:hover {
 	margin-bottom: 15px;
 }
 
+/* Banner flotante de oferta especial */
+.banner-flotante {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 9999;
+	background-color: #b04a74;
+	color: #fff;
+	padding: 15px 20px;
+	border-radius: 8px;
+	font-weight: bold;
+	font-size: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
 /* Footer */
 footer {
 	background-color: #f5e1e9;
